@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petualangan Si Kiki: Dunia Fi’il Arab</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#7fd3ff;--sky2:#d8f3ff;--grass:#7bdc8a;--ink:#3b2a5a;--card:#fffaf0;--pink:#ff7aa8;--yellow:#ffd84d;--peach:#ffab6b;--mint:#59d6b0;--lav:#b79cff;--panelink:#3b2a5a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#3a6fd8;--sky2:#6d8cf0;--grass:#3fae68;--ink:#fff3d6}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);background:linear-gradient(var(--sky),var(--sky2) 55%,var(--grass) 55%);min-height:100vh;overflow-x:hidden}
+.cloud{position:fixed;font-size:64px;opacity:.95;animation:drift 40s linear infinite;pointer-events:none}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(110vw)}}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 40px;position:relative}
+h1{font-size:clamp(26px,6vw,44px);margin:6px 0;text-align:center;text-shadow:3px 3px 0 #fff}
+.sub{text-align:center;font-weight:600;margin-bottom:10px}
+.hud{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.pill{background:#fff;border:3px solid var(--ink);border-radius:999px;padding:4px 14px;font-weight:700;color:#3b2a5a}
+.map{position:relative;height:520px;margin-top:8px}
+.map svg.road{position:absolute;inset:0;width:100%;height:100%}
+.spot{position:absolute;transform:translate(-50%,-50%);width:112px;text-align:center;cursor:pointer;border:0;background:none;font-family:inherit;color:#3b2a5a;transition:transform .2s}
+.spot:hover{transform:translate(-50%,-56%) scale(1.1) rotate(-3deg)}
+.spot .ic{display:grid;place-items:center;width:78px;height:78px;margin:0 auto;border-radius:50%;border:4px solid #3b2a5a;font-size:40px;box-shadow:0 6px 0 #3b2a5a;animation:bob 2.4s ease-in-out infinite}
+.spot .nm{display:block;background:#fff;border:3px solid #3b2a5a;border-radius:14px;margin-top:8px;padding:2px 6px;font-size:13px;font-weight:700;line-height:1.2}
+.spot.done .ic::after{content:"⭐";position:absolute;margin:-60px -70px 0 0;font-size:28px;animation:pop .5s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+#kiki{position:absolute;width:64px;height:64px;transform:translate(-50%,-130%);transition:left .9s cubic-bezier(.5,1.6,.5,1),top .9s cubic-bezier(.5,1.6,.5,1);pointer-events:none;z-index:5;animation:hop 1s infinite}
+@keyframes hop{50%{margin-top:-10px}}
+.flower{position:absolute;font-size:26px;transform-origin:bottom;animation:sway 2.5s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(10deg)}}
+#panel{position:fixed;inset:0;background:rgba(59,42,90,.55);display:none;align-items:center;justify-content:center;padding:14px;z-index:20}
+#panel.on{display:flex}
+.card{background:var(--card);color:var(--panelink);border:5px solid #3b2a5a;border-radius:30px;max-width:720px;width:100%;max-height:92vh;overflow:auto;padding:20px 22px;position:relative;animation:open .35s cubic-bezier(.3,1.6,.5,1);box-shadow:0 10px 0 #3b2a5a}
+@keyframes open{from{transform:scale(.4) rotate(-6deg);opacity:0}}
+.card::before,.card::after{content:"✿";position:absolute;font-size:26px;color:var(--pink)}
+.card::before{top:8px;left:12px}.card::after{bottom:8px;right:12px}
+.bar{height:12px;background:#ffe9b8;border-radius:9px;overflow:hidden;margin-bottom:12px;border:2px solid #3b2a5a}
+.bar i{display:block;height:100%;background:var(--pink);transition:width .4s}
+.card h2{margin:4px 0 8px;font-size:24px}
+.card p,.card li{line-height:1.55;font-size:16px}
+.ar{font-family:'Amiri','Traditional Arabic',serif;direction:rtl;font-size:1.35em;line-height:1.9}
+.hl{background:var(--yellow);border-radius:8px;padding:0 6px;font-weight:700}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:15px;background:#fff;border-radius:14px;overflow:hidden}
+td,th{border:2px solid #f1d9a8;padding:5px 8px;text-align:center}th{background:var(--mint);color:#fff}
+.tw{overflow-x:auto}
+.mini{display:flex;gap:10px;align-items:center;background:#e8f7ff;border-radius:18px;padding:8px 12px;margin:10px 0}
+.mini svg{flex:none;width:46px;height:46px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.btn{font-family:inherit;font-size:17px;font-weight:700;border:4px solid #3b2a5a;border-radius:999px;padding:8px 22px;background:var(--yellow);color:#3b2a5a;cursor:pointer;box-shadow:0 5px 0 #3b2a5a;transition:transform .15s}
+.btn:hover{transform:translateY(-3px) rotate(-2deg)}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #3b2a5a}
+.btn.p{background:var(--pink)}.btn.g{background:#fff}
+.badge{font-size:70px;text-align:center;animation:pop .6s}
+</style></head><body>
+<div class="cloud" style="top:30px">☁️</div><div class="cloud" style="top:110px;animation-duration:60s;animation-delay:-20s;font-size:48px">☁️</div>
+<div class="wrap">
+<h1>🌈 Petualangan Si Kiki 🌈</h1>
+<div class="sub">Jelajahi Dunia Fi’il Arab bersama Kiki si bintang kecil!</div>
+<div class="hud"><span class="pill">⭐ <b id="st">0</b>/5</span><span class="pill" id="bd">🏅 Belum ada badge</span></div>
+<div class="map" id="map"><svg class="road" viewBox="0 0 900 520" preserveAspectRatio="none"><path d="M90 440 C 250 480, 260 330, 260 300 S 470 240, 460 150 S 700 120, 720 250 S 800 420, 820 430" fill="none" stroke="#ffe08a" stroke-width="34" stroke-linecap="round"/><path d="M90 440 C 250 480, 260 330, 260 300 S 470 240, 460 150 S 700 120, 720 250 S 800 420, 820 430" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="3 16" stroke-linecap="round"/></svg>
+<svg id="kiki" viewBox="0 0 64 64"><path d="M32 4l8 16 18 3-13 12 4 18-17-9-17 9 4-18L6 23l18-3z" fill="#ffd84d" stroke="#3b2a5a" stroke-width="3" stroke-linejoin="round"/><circle cx="25" cy="31" r="3" fill="#3b2a5a"/><circle cx="39" cy="31" r="3" fill="#3b2a5a"/><circle cx="21" cy="37" r="3" fill="#ff7aa8"/><circle cx="43" cy="37" r="3" fill="#ff7aa8"/><path id="mouth" d="M28 38q4 5 8 0" stroke="#3b2a5a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+</div></div>
+<div id="panel"><div class="card" id="card"></div></div>
+<script>
+const T=(h,rows)=>`<div class="tw"><table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const K=(m,t)=>`<div class="mini"><svg viewBox="0 0 64 64"><path d="M32 4l8 16 18 3-13 12 4 18-17-9-17 9 4-18L6 23l18-3z" fill="#ffd84d" stroke="#3b2a5a" stroke-width="3"/><circle cx="25" cy="31" r="3" fill="#3b2a5a"/><circle cx="39" cy="31" r="3" fill="#3b2a5a"/><path d="M28 38q4 5 8 0" stroke="#3b2a5a" stroke-width="2.5" fill="none"/></svg><div><b>Kiki:</b> ${t}</div></div>`;
+const A=[
+{id:0,n:'Taman Shighat & Dhamir',ic:'📖',c:'#ff7aa8',x:90,y:440,b:'🌸 Badge Pemetik Shighat',p:[
+['Selamat datang di Taman Shighat!',`<p>Fi’il Arab berubah bentuk mengikuti <span class="hl">pelaku (dhamir)</span>: siapa, berapa orang, laki-laki atau perempuan. Setiap perubahan itu disebut <span class="hl">shighat</span>.</p><p>Fi’il punya tiga zaman: <span class="hl">madhi</span> (lampau), <span class="hl">mudhari’</span> (sekarang/akan datang), dan <span class="hl">amr</span> (perintah).</p>${K(0,'Hafalkan dulu tabel 14 shighat di halaman berikut ya!')}`],
+['14 Shighat Fi’il Madhi',T(['Dhamir','Fi’il','Arti'],[['<span class=ar>هو</span>','<span class=ar>فَعَلَ</span>','dia (lk)'],['<span class=ar>هما</span>','<span class=ar>فَعَلَا</span>','mereka berdua (lk)'],['<span class=ar>هم</span>','<span class=ar>فَعَلُوا</span>','mereka (lk)'],['<span class=ar>هي</span>','<span class=ar>فَعَلَتْ</span>','dia (pr)'],['<span class=ar>هما</span>','<span class=ar>فَعَلَتَا</span>','mereka berdua (pr)'],['<span class=ar>هنّ</span>','<span class=ar>فَعَلْنَ</span>','mereka (pr)'],['<span class=ar>أنتَ</span>','<span class=ar>فَعَلْتَ</span>','kamu (lk)'],['<span class=ar>أنتما</span>','<span class=ar>فَعَلْتُمَا</span>','kalian berdua'],['<span class=ar>أنتم</span>','<span class=ar>فَعَلْتُمْ</span>','kalian (lk)'],['<span class=ar>أنتِ</span>','<span class=ar>فَعَلْتِ</span>','kamu (pr)'],['<span class=ar>أنتنّ</span>','<span class=ar>فَعَلْتُنَّ</span>','kalian (pr)'],['<span class=ar>أنا</span>','<span class=ar>فَعَلْتُ</span>','saya'],['<span class=ar>نحن</span>','<span class=ar>فَعَلْنَا</span>','kami/kita']])],
+['Ciri madhi, mudhari’, dan amr',`<ul><li><b>Madhi:</b> menunjukkan peristiwa yang sudah selesai; bisa diterima <span class="hl">ta’ ta’nits sakinah</span> (<span class=ar>فَعَلَتْ</span>) atau ta’ fa’il (<span class=ar>فَعَلْتُ</span>).</li><li><b>Mudhari’:</b> peristiwa sedang/akan terjadi; diawali salah satu huruf mudhara’ah <span class="ar hl">أ ن ي ت</span>.</li><li><b>Amr:</b> permintaan melakukan sesuatu di masa depan, contoh <span class=ar>اِذْهَبْ</span>, <span class=ar>كُلْ</span>.</li></ul>${K(0,'Kalau mudhari’-nya diawali huruf ta, bisa jadi untuk kamu atau untuk dia (perempuan). Lihat konteksnya!')}`]]},
+{id:1,n:'Bukit Af’al',ic:'🏃',c:'#ffab6b',x:260,y:300,b:'🥕 Badge Pelari Fi’il',p:[
+['Bukit Fi’il',`<p>Fi’il adalah kata yang menunjukkan <span class="hl">perbuatan/keadaan dalam waktu tertentu</span>. Kita bisa membaginya dari beberapa sisi.</p>${K(0,'Ada tiga cara membagi: dari objek, dari pelaku, dan dari huruf-hurufnya.')}`],
+['Lazim dan Muta’addi',`${T(['Jenis','Arti','Contoh'],[['Lazim','tidak butuh maf’ul bih','<span class=ar>جَلَسَ زَيْدٌ</span> (Zaid duduk)'],['Muta’addi','butuh maf’ul bih','<span class=ar>كَتَبَ الرِّسَالَةَ</span> (menulis surat)']])}<p>Fi’il muta’addi bisa menjadi lazim dan sebaliknya lewat penambahan huruf atau perubahan wazan.</p>`],
+['Ma’lum dan Majhul',`<p><span class="hl">Ma’lum</span>: pelakunya disebut. <span class="hl">Majhul</span>: pelakunya dibuang, maf’ul bih naik menjadi na’ib fa’il.</p>${T(['Ma’lum','Majhul'],[['<span class=ar>كَتَبَ</span> → ia menulis','<span class=ar>كُتِبَ</span> → ditulis'],['<span class=ar>يَكْتُبُ</span>','<span class=ar>يُكْتَبُ</span>']])}<p>Di madhi, huruf awal didhammah dan huruf sebelum akhir dikasrah. Di mudhari’, huruf awal didhammah dan huruf sebelum akhir difathah.</p>`],
+['Fi’il shahih dan mu’tall',`<p>Fi’il <span class="hl">mu’tall</span> mengandung huruf ‘illah (<span class="ar">و ا ي</span>); selain itu disebut shahih. Huruf ‘illah bisa berubah, dibuang, atau diganti agar lebih ringan diucapkan.</p>${T(['Jenis','Contoh'],[['Mitsal (awal ‘illah)','<span class=ar>وَعَدَ - يَعِدُ</span>'],['Ajwaf (tengah ‘illah)','<span class=ar>قَامَ - يَقُومُ</span>'],['Naqish (akhir ‘illah)','<span class=ar>دَعَا - يَدْعُو</span>']])}`]]},
+{id:2,n:'Kota Asma’',ic:'🏙️',c:'#59d6b0',x:460,y:150,b:'🏰 Badge Penjaga Isim',p:[
+['Kota Asma’',`<p>Isim adalah kata yang menunjukkan makna tanpa terikat waktu. Banyak isim <span class="hl">diturunkan (musytaq)</span> dari fi’il, misalnya isim fa’il, isim maf’ul, dan mashdar.</p>${T(['Fi’il','Isim fa’il','Isim maf’ul'],[['<span class=ar>كَتَبَ</span>','<span class=ar>كَاتِب</span> (penulis)','<span class=ar>مَكْتُوب</span> (yang ditulis)'],['<span class=ar>نَصَرَ</span>','<span class=ar>نَاصِر</span>','<span class=ar>مَنْصُور</span>']])}`],
+['Temuan unik: Fi’il dari Isim!',`<p>Menurut makalah <i>Azh-Zhawahirul Lughawiyyah</i>, faham Mazhab Bashrah menyatakan banyak fi’il lahir dari isim, <span class="hl">sekitar 3.000 kata</span>, dari kelompok isim adad, zaman, tempat, kerabat, suku, anggota badan, benda konkret, dan lainnya.</p>${K(0,'Isim bisa berubah jadi kata kerja. Keren, kan?')}`],
+['Contoh: Isim zaman jadi fi’il',`${T(['Isim zaman','Fi’il baru','Makna'],[['<span class=ar>الخريف</span>','<span class=ar>أَخْرَفَ</span>','memasuki musim gugur'],['<span class=ar>الربيع</span>','<span class=ar>أَرْبَعَ</span>','memasuki musim semi'],['<span class=ar>الصيف</span>','<span class=ar>أَصَافَ</span>','memasuki musim panas']])}<p>Polanya sering memakai wazan <span class=ar>أَفْعَلَ</span> dengan makna <span class="hl">memasuki</span> waktu tersebut.</p>`]]},
+{id:3,n:'Lab Mujarrad & Mazid',ic:'🔬',c:'#b79cff',x:720,y:250,b:'🧪 Badge Ilmuwan Wazan',p:[
+['Apa itu mujarrad dan mazid?',`<p><span class="hl">Mujarrad</span>: semua hurufnya asli, tanpa tambahan. <span class="hl">Mazid</span>: ada huruf tambahan di luar huruf asli.</p><p>Timbangan (wazan) memakai <span class=ar>ف ع ل</span>: fa’ = huruf pertama, ‘ain = huruf kedua, lam = huruf ketiga.</p>${K(0,'Huruf tambahan biasanya dihafal dengan kata <span class="ar">سألتمونيها</span>.')}`],
+['6 wazan tsulatsi mujarrad',`${T(['No','Wazan','Contoh','Arti'],[['1','<span class=ar>فَعَلَ - يَفْعُلُ</span>','<span class=ar>نَصَرَ - يَنْصُرُ</span>','menolong'],['2','<span class=ar>فَعَلَ - يَفْعِلُ</span>','<span class=ar>جَلَسَ - يَجْلِسُ</span>','duduk'],['3','<span class=ar>فَعَلَ - يَفْعَلُ</span>','<span class=ar>فَتَحَ - يَفْتَحُ</span>','membuka'],['4','<span class=ar>فَعِلَ - يَفْعَلُ</span>','<span class=ar>فَرِحَ - يَفْرَحُ</span>','gembira'],['5','<span class=ar>فَعِلَ - يَفْعِلُ</span>','<span class=ar>حَسِبَ - يَحْسِبُ</span>','menghitung'],['6','<span class=ar>فَعُلَ - يَفْعُلُ</span>','<span class=ar>حَسُنَ - يَحْسُنُ</span>','baik']])}<p>Wazan 3 biasanya terjadi bila ‘ain atau lam fi’il huruf halq, seperti <span class=ar>قَرَأَ - يَقْرَأُ</span>.</p>`],
+['Ruba’i mujarrad',`<p>Fi’il ruba’i mujarrad hanya punya satu wazan: <span class="ar hl">فَعْلَلَ</span>, misalnya <span class=ar>دَحْرَجَ</span> (menggelindingkan) dan <span class=ar>تَرْجَمَ</span> (menerjemahkan). Karena hurufnya banyak, ia sulit berubah bentuk sehingga jarang dipakai dalam wazan lain.`],
+['Wazan mazid tsulatsi',`${T(['Wazan','Ciri makna','Contoh'],[['<span class=ar>أَفْعَلَ</span>','ta’diyah, masuk ke suatu keadaan','<span class=ar>أَكْرَمَ</span>'],['<span class=ar>فَعَّلَ</span>','penguatan, ta’diyah, salb','<span class=ar>كَسَّرَ</span>'],['<span class=ar>فَاعَلَ</span>','saling melakukan (musyarakah)','<span class=ar>ضَارَبَ</span>'],['<span class=ar>تَفَعَّلَ</span>','mutha’awah fa’‘ala','<span class=ar>تَعَلَّمَ</span>'],['<span class=ar>تَفَاعَلَ</span>','saling, pura-pura','<span class=ar>تَضَارَبَ</span>'],['<span class=ar>اِنْفَعَلَ</span>','mutha’awah (akibat)','<span class=ar>اِنْكَسَرَ</span>'],['<span class=ar>اِفْتَعَلَ</span>','mutha’awah, upaya','<span class=ar>اِكْتَسَبَ</span>'],['<span class=ar>اِسْتَفْعَلَ</span>','meminta, menjadi','<span class=ar>اِسْتَغْفَرَ</span>']])}<p>Ruba’i mazid: <span class=ar>تَفَعْلَلَ</span> (<span class=ar>تَدَحْرَجَ</span>), <span class=ar>اِفْعَنْلَلَ</span>, dan <span class=ar>اِفْعَلَلَّ</span>.</p>`]]},
+{id:4,n:'Rumah Amtsilah Tashrifiyah',ic:'🏠',c:'#ffd84d',x:820,y:430,b:'👑 Badge Raja Tashrif',p:[
+['Bonus: Amtsilah Tashrifiyah!',`<p>Tashrif adalah mengubah satu kata dasar menjadi bentuk lain: madhi, mudhari’, amr, mashdar, isim fa’il, dan isim maf’ul.</p>${K(0,'Contoh lengkap dari fi’il <span class="ar">نَصَرَ</span> menolong:')}${T(['Bentuk','Arab'],[['Madhi','<span class=ar>نَصَرَ</span>'],['Mudhari’','<span class=ar>يَنْصُرُ</span>'],['Amr','<span class=ar>اُنْصُرْ</span>'],['Mashdar','<span class=ar>نَصْرٌ</span>'],['Isim fa’il','<span class=ar>نَاصِرٌ</span>'],['Isim maf’ul','<span class=ar>مَنْصُورٌ</span>']])}`],
+['Tantangan akhir',`<p>Coba urai <span class=ar>اِسْتَغْفَرَ</span>: huruf asli <span class=ar>غ ف ر</span>, tambahan <span class=ar>اِسْتَ</span>, wazan <span class=ar>اِسْتَفْعَلَ</span>, makna meminta ampun.</p><p>Kalau kamu bisa melakukannya, kamu sudah resmi menjadi Raja/Ratu Tashrif! 🎉</p>`]]}
+];
+const done=new Set();let cur=0,pg=0;
+const map=document.getElementById('map'),kiki=document.getElementById('kiki');
+function place(el,x,y){el.style.left=(x/900*100)+'%';el.style.top=(y/520*100)+'%'}
+place(kiki,A[0].x,A[0].y);
+A.forEach(a=>{const b=document.createElement('button');b.className='spot';b.id='s'+a.id;place(b,a.x,a.y);b.innerHTML=`<span class="ic" style="background:${a.c}">${a.ic}</span><span class="nm">${a.n}</span>`;b.onclick=()=>{place(kiki,a.x,a.y);setTimeout(()=>open(a.id),700)};map.appendChild(b)});
+[[170,490,'🌷'],[350,420,'🌼'],[560,250,'🌻'],[620,90,'🌸'],[790,330,'🌷'],[60,360,'🌼']].forEach(([x,y,e])=>{const f=document.createElement('div');f.className='flower';f.textContent=e;place(f,x,y);map.appendChild(f)});
+function open(i){cur=i;pg=0;render();document.getElementById('panel').classList.add('on')}
+function render(){const a=A[cur],p=a.p[pg],last=pg==a.p.length-1;
+card.innerHTML=`<div class="bar"><i style="width:${(pg+1)/a.p.length*100}%"></i></div><h2>${a.ic} ${p[0]}</h2>${p[1]}<div class="nav"><button class="btn g" onclick="${pg?'pg--;render()':'closeP()'}">${pg?'◀ Kembali':'✖ Tutup'}</button><button class="btn p" onclick="${last?'finish()':'pg++;render()'}">${last?'Selesai ⭐':'Lanjut ▶'}</button></div>`;card.scrollTop=0}
+function closeP(){document.getElementById('panel').classList.remove('on')}
+function finish(){done.add(cur);document.getElementById('s'+cur).classList.add('done');st.textContent=done.size;
+const bs=[...done].map(i=>A[i].b);bd.textContent=bs.length?bs[bs.length-1]:'🏅 Belum ada badge';
+const a=A[cur];card.innerHTML=`<div class="badge">${a.b.split(' ')[0]}</div><h2 style="text-align:center">Hore! ${a.b.slice(2)}</h2><p style="text-align:center">${done.size==5?'Kamu menyelesaikan seluruh petualangan! Kiki bangga banget! 🎊':'Area selesai! Lanjut ke tempat berikutnya di peta.'}</p><div class="nav" style="justify-content:center"><button class="btn" onclick="closeP()">Kembali ke peta 🗺️</button></div>`;
+mouth.setAttribute('d','M26 36q6 10 12 0');setTimeout(()=>mouth.setAttribute('d','M28 38q4 5 8 0'),2000)}
+</script></div></body></html>
